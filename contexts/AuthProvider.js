@@ -1,5 +1,6 @@
 import React ,{useState, useContext, useEffect} from 'react';
 import firebase,{ auth } from '../config/firebase.config';
+import {Spinner} from 'react-bootstrap';
 
 const AuthContext = React.createContext();
 
@@ -46,7 +47,9 @@ export function AuthProvider({children}) {
     }
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {!loading ? children : <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>}
         </AuthContext.Provider>
     );
 }
