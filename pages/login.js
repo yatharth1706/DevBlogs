@@ -21,7 +21,7 @@ const Login = () => {
             setError('');
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
-            router.push("/");        
+            router.push("/dashboard");        
         }catch(error){
             setError(error.message);
         }
@@ -34,7 +34,7 @@ const Login = () => {
         try {
             setError('');
             await loginWithGoogle();
-            router.push("/");
+            router.push("/dashboard");
             
         } catch (error) {
             setError(error.message);
