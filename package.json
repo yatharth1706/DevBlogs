@@ -13,6 +13,7 @@
     "next": "10.0.1",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.0",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "suneditor-react": "^2.14.4"
   }
 }
