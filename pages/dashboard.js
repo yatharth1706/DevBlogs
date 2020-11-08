@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {useAuth} from '../contexts/AuthProvider';
+import {useRouter} from 'next/router';
 
 const Dashboard = () => {
+    const {currUser} = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if(!currUser){
+            router.push("/login");            
+        }
+    }, [])
+
     return (
         <div>
-            Dashboard
+            
         </div>
     );
 };
 
-export default Dashboard;Dashboard
+export default Dashboard;

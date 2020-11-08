@@ -58,7 +58,7 @@ const Login = () => {
                         </FormGroup>
                         <Button disabled = {loading} className = "w-100" style={{backgroundColor: "#5952cb"}} variant = "primary" type = "submit">Login</Button>
                         <p className = "text-center mt-3">Or</p>
-                        <Button className = "w-100 outline-light" variant = "light" onClick = {googleLogin}>Sign in with Google</Button> 
+                        <Button className = "w-100 outline-light" variant = "light" onClick = {googleLogin}><img src="/img/google.png" width={23} height={23} /> Sign in with Google</Button> 
                     </Form>
                 </Card.Body>
             </Card>
