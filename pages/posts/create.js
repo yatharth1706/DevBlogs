@@ -12,30 +12,35 @@ const PostCreate = () => {
                 <Button variant = "light">Actions</Button>
             </Nav>
         </Navbar>
-        <div style={{height: "auto", padding: "30px", display: "flex", justifyContent : "center"}}>
-            <Card>
-            
-                <Card.Body>
-                    <Form>
-                        <FormGroup>
-                            <Form.Label>Title</Form.Label>
-                            <FormControl type="text" placeholder = "Enter title of your blog" />
-                        </FormGroup>
-                        <Suneditor lang="en" setOptions = {{
-                            height: "400",                        
-                    buttonList: [['template'],['undo','redo'],
-                          [ 'font','fontSize','formatBlock','align','bold','underline','italic'],
-                          ['list'], ['image'],['video'],['link'],['table'],['horizontalRule'],
-                          ['showBlocks'],['codeView'],['hiliteColor'],['fontColor'],['fullScreen']]	}} />
-                    </Form>
-                    <div style={{display : "flex", justifyContent : "space-between", padding: "10px 0px"}}>
-                        <Button variant = "dark">Preview</Button>
-                        <Button style={{backgroundColor : "#5952cb"}}>Create</Button>
-                    </div>
-                </Card.Body>
-                
-            </Card>
+        <div style={{width: "100%", height:"700px", display : "flex"}}>
+            <div style={{width: "80%",height: "auto", padding: "30px"}}>
+                <Card style={{width: "80%", margin: "0 auto"}}>
+                    <Card.Body>
+                        <Form>
+                            <FormGroup>
+                                <Form.Label>Title</Form.Label>
+                                <FormControl type="text" placeholder = "Enter title of your blog" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Form.Label>Blog</Form.Label>
+                                <Suneditor lang="en" setOptions = {{
+                                height: "400",                        
+                                buttonList: [['template'],['undo','redo'],[ 'font','fontSize','formatBlock','align','bold','underline','italic'],
+                            ['list'], ['image'],['video'],['link'],['table'],['horizontalRule'],
+                            ['showBlocks'],['codeView'],['hiliteColor'],['fontColor'],['fullScreen']]	}} />
+                            </FormGroup>
+                        </Form>
+                    </Card.Body>
+                </Card>
+            </div>
+            <div className = "sidebar" style={{display : "flex",flexDirection : "column", padding: "30px", width: "20%", height: "100%", backgroundColor: "rgb(249,250,250)", boxShadow : "-2px 0px 10px lightgray"}}>
+                <Button className = "mb-4" style={{backgroundColor : "#5952CB"}}>Preview</Button>
+                <Button className = "mb-3" style = {{backgroundColor : "#5952CB"}} >Publish</Button>
+                <p className = "text-center">Or</p>
+                <Button variant = "dark">Save as draft</Button>
+            </div>
         </div>
+        
         </>
     );
 };
