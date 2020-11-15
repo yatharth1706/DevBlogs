@@ -3,6 +3,7 @@ import Layout from '../layouts/layout';
 import {Form, Card, Button, FormControl, FormLabel, FormGroup, Alert} from 'react-bootstrap';
 import {useAuth} from '../contexts/AuthProvider';
 import {useRouter} from 'next/router';
+import Head from 'next/head';
 
 const Login = () => {
     const emailRef = useRef();
@@ -43,6 +44,9 @@ const Login = () => {
 
     return (
         <div className = "d-flex w-100 align-items-center justify-content-center" style={{minHeight: "80vh"}}>
+            <Head>
+                <title>Login</title>
+            </Head>
             <Card style = {{width : "380px"}}>
                 <Card.Header><h3>Login</h3></Card.Header>
                 <Card.Body>
