@@ -24,6 +24,7 @@ const Layout = ({children}) => {
             <Nav className = "mr-auto">
                 <Nav.Link as={Link} href="/">Home</Nav.Link>
                 <Nav.Link href="/contribute">Contribute</Nav.Link>
+                <Nav.Link href = "/posts/create">Create Blog</Nav.Link>
                 {currUser ? <Button variant = "light" className = "ml-1" onClick = {handleLogout}>Logout</Button>  : <NavDropdown title="Signup / Login">
                     <NavDropdown.Item href = "/login">Login</NavDropdown.Item>
                     <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
