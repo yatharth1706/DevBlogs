@@ -15,6 +15,7 @@ const PostCreate = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [preview, setPreview] = useState(false);
+    const [coverPic, setCoverPic] = useState('');
 
     useEffect(() => {
         if(!currUser){
@@ -35,8 +36,8 @@ const PostCreate = () => {
         console.log(blogValue);
     }
 
-    const handleChange = (content) => {
-        setBlogValue(content);
+    const handleChange = (e) => {
+        setBlogValue(e.target.value);
     }
 
     const backToblog = () => {
@@ -45,6 +46,15 @@ const PostCreate = () => {
 
     const setTitle = (e) => {
         saveTitle(e.target.value);
+    }
+
+    const saveCoverPic = (e) =>{
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = (e) => {
+            setCoverPic(reader.result);
+            console.log(reader.result);
+        }
     }
 
     return (
@@ -59,7 +69,7 @@ const PostCreate = () => {
             </Nav>
         </Navbar>
         <div style={{width: "100%", height:"700px", display : "flex"}}>
-        {preview ? <Preview showPreview = {preview} contents = {blogValue} backToblog = {backToblog} title = {title}/> : <div style={{width: "80%",height: "auto", padding: "30px"}}>
+        {preview ? <Preview showPreview = {preview} contents = {blogValue} backToblog = {backToblog} title = {title} coverPic = {coverPic}/> : <div style={{width: "80%",height: "auto", padding: "30px"}}>
             <Card style={{width: "80%", margin: "0 auto"}}>
                 <Card.Body>
                     <Form>
@@ -67,13 +77,13 @@ const PostCreate = () => {
                             <Form.Label>Title</Form.Label>
                             <FormControl type="text" placeholder = "Enter title of your blog" onChange = {setTitle} value = {title}/>
                         </FormGroup>
+                        <Form.Group>
+                            <Form.Label>Cover Image</Form.Label>
+                            <Form.File id="exampleFormControlFile1"  style={{border : "1px solid lightgray", padding:"10px"}} onChange = {saveCoverPic} placeholder="asdf"/>
+                        </Form.Group>
                         <FormGroup>
                             <Form.Label>Blog</Form.Label>
-                            <Suneditor lang="en" setOptions = {{
-                            height: "400",                        
-                            buttonList: [['undo','redo'],[ 'font','fontSize','formatBlock','align','bold','underline','italic'],
-                        ['list'], ['image'],['video'],['link'],['table'],['horizontalRule'],
-                        ['showBlocks'],['codeView'],['hiliteColor'],['fontColor'],['fullScreen']]	}} id="suneditor" onChange = {handleChange} setContents = {blogValue}/>
+                            <FormControl as="textarea" rows = {15} onChange = {handleChange} value={blogValue}/>
                         </FormGroup>
                     </Form>
                 </Card.Body>
