@@ -8,6 +8,7 @@ import {useAuth} from '../../contexts/AuthProvider';
 import withPrivateRoute from '../../components/withPrivateRoute';
 import Preview from '../../components/Preview';
 
+
 const PostCreate = () => {
     const {currUser} = useAuth();
     const [title, saveTitle] = useState('');
@@ -57,6 +58,10 @@ const PostCreate = () => {
         }
     }
 
+    const changeCoverPic = () => {
+        document.getElementById("coverPicFileChooser2").click();
+    }
+
     return (
         <>
         <Head>
@@ -78,8 +83,8 @@ const PostCreate = () => {
                             <FormControl type="text" placeholder = "Enter title of your blog" onChange = {setTitle} value = {title}/>
                         </FormGroup>
                         <Form.Group>
-                            <Form.Label>Cover Image</Form.Label>
-                            <Form.File id="exampleFormControlFile1"  style={{border : "1px solid lightgray", padding:"10px"}} onChange = {saveCoverPic} placeholder="asdf"/>
+                            <Form.Label>Cover Image</Form.Label><br />
+                            {coverPic ? <><Button className = "mr-3" style={{backgroundColor : "#5952cb"}} onClick = {changeCoverPic}>Change</Button><Button variant = "dark" onClick = {() => setCoverPic('')}>Remove</Button><Form.File id="coverPicFileChooser2"  style={{border : "1px solid lightgray", padding:"10px", display : "none"}} onChange = {saveCoverPic} placeholder="asdf"/></> : <Form.File id="coverPicFileChooser1"  style={{border : "1px solid lightgray", padding:"10px"}} onChange = {saveCoverPic} placeholder="asdf"/>}
                         </Form.Group>
                         <FormGroup>
                             <Form.Label>Blog</Form.Label>
