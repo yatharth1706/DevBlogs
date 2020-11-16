@@ -13,7 +13,7 @@ const renderers = {
 
 const Preview = ({showPreview ,contents, backToblog, title, coverPic}) => {
     return (
-        <div style={{display: (showPreview === true) ? "display" : "block", width: "80%",height: "auto", padding: "30px"}}>
+        <div className = "previewDiv" style={{display: (showPreview === true) ? "display" : "block", padding: "20px"}}>
             <img src={coverPic}/>
             <h3>{title}</h3>
             <Markdown renderers = {renderers} plugins = {[gfm]}>{contents}</Markdown>

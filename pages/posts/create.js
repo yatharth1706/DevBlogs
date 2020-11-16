@@ -7,11 +7,13 @@ import { useRouter } from 'next/router';
 import {useAuth} from '../../contexts/AuthProvider';
 import withPrivateRoute from '../../components/withPrivateRoute';
 import Preview from '../../components/Preview';
+import {storage, db} from '../../config/firebase.config';
 
 
 const PostCreate = () => {
     const {currUser} = useAuth();
     const [title, saveTitle] = useState('');
+    const [coverFile, setCoverFile] = useState();
     const [blogValue, setBlogValue] = useState('');
     const router = useRouter();
     const [loading, setLoading] = useState(true);
@@ -34,8 +36,44 @@ const PostCreate = () => {
     }
 
     const publishBlog = () => {
-        console.log(blogValue);
+        saveBannerPicInFireStore();
     }
+
+    const saveBannerPicInFireStore = () => {
+        console.log(coverFile);
+        const reference = storage().ref();
+            const file = coverFile;
+            const name = new Date() + '-' + file.name;
+
+            const metadata = {
+                contentType : file.type
+            }
+
+            const Task = reference.child(name).put(file, metadata);
+
+            Task.on('state_changed', (snapshot) =>{
+                
+              }, (error) => {
+                // Handle unsuccessful uploads
+              }, () => {
+                
+                Task.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                  console.log('File available at', downloadURL);
+                  // now store all data in firestore
+                  const toStore = {
+                      title,
+                      coverPic : downloadURL,
+                      blog : blogValue,
+                      createdAt : new Date()
+                  }
+
+                  db.collection('blogs').doc(currUser.uid).collection('posts').add(toStore).then(() => {
+                      router.push("/dashboard");
+                  })
+
+                });
+              });
+            }
 
     const handleChange = (e) => {
         setBlogValue(e.target.value);
@@ -52,9 +90,9 @@ const PostCreate = () => {
     const saveCoverPic = (e) =>{
         var reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
+        setCoverFile(e.target.files[0]);
         reader.onload = (e) => {
             setCoverPic(reader.result);
-            console.log(reader.result);
         }
     }
 
@@ -94,7 +132,7 @@ const PostCreate = () => {
                 </Card.Body>
             </Card>
         </div>}
-        <div className = "sidebar" style={{display : "flex",flexDirection : "column", padding: "30px", width: "20%", height: "100%", backgroundColor: "rgb(249,250,250)", boxShadow : "-2px 0px 10px lightgray"}}>
+        <div className = "sidebar" style={{display : "flex",flexDirection : "column", padding: "30px", width: "20%", height: "100%", backgroundColor: "rgb(249,250,250)", boxShadow : "-2px 0px 10px lightgray", position: "absolute", right: 0}}>
                             <Button className = "mb-4" style={{backgroundColor : "#5952CB"}} onClick = {preview ? backToblog : seePreview}>{preview ? "Back" : "Preview"}</Button>
             <Button className = "mb-3" style = {{backgroundColor : "#5952CB"}} onClick = {publishBlog} >Publish</Button>
             <p className = "text-center">Or</p>
