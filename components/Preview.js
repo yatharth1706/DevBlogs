@@ -1,11 +1,22 @@
 import React from 'react';
+import Markdown from 'react-markdown';
+import gfm from 'remark-gfm';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import {dracula} from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import {render} from 'react-dom'
+
+const renderers = {
+  code: ({language, value}) => {
+    return <SyntaxHighlighter style={dracula} language={language} children={value} />
+  }
+}
 
 const Preview = ({showPreview ,contents, backToblog, title, coverPic}) => {
     return (
         <div style={{display: (showPreview === true) ? "display" : "block", width: "80%",height: "auto", padding: "30px"}}>
             <img src={coverPic}/>
             <h3>{title}</h3>
-            <div dangerouslySetInnerHTML = {{ __html : contents}}></div>
+            <Markdown renderers = {renderers} plugins = {[gfm]}>{contents}</Markdown>
         </div>
     );
 };
