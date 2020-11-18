@@ -22,7 +22,7 @@ const Layout = ({children}) => {
                 <Navbar.Toggle />
             <Navbar.Collapse>
             <Nav className = "mr-auto">
-                <Nav.Link as={Link} href="/">Home</Nav.Link>
+                {currUser ? <Nav.Link href = "/dashboard">Dashboard</Nav.Link> : <Nav.Link as={Link} href="/">Home</Nav.Link>}
                 <Nav.Link href="/contribute">Contribute</Nav.Link>
                 <Nav.Link href = "/posts/create">Create Blog</Nav.Link>
                 {currUser ? <Button variant = "light" className = "ml-1" onClick = {handleLogout}>Logout</Button>  : <NavDropdown title="Signup / Login">

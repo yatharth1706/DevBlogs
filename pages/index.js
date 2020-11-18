@@ -1,10 +1,26 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Layout from '../layouts/layout';
+import {useAuth} from '../contexts/AuthProvider';
+import {useRouter} from 'next/router';
+import { useState, useEffect } from 'react';
+import {Spinner} from 'react-bootstrap';
 
-export default function Dashboard() {
-  return (
-    <div className="container-fluid hero-big-container">
+export default function Home() {
+    const router = useRouter();
+    const {currUser} = useAuth();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if(currUser){
+            setLoading(false);
+            router.push("/dashboard");
+        }
+        setLoading(false);
+    },[])
+  
+    return (
+        (loading === false) ? <div className="container-fluid hero-big-container">
         <div className="hero-container">
             <div className="hero-image">
                 <img src="/img/first-image.svg" alt="First Image" />
@@ -20,6 +36,8 @@ export default function Dashboard() {
                 </div>
             </div>
         </div>
-    </div>
-  )
+    </div> : <Spinner animation="border" role="status">
+         <span className="sr-only">Loading...</span>
+    </Spinner>
+    )
 }
