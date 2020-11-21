@@ -64,12 +64,12 @@ const PostCreate = () => {
                       title,
                       coverPic : downloadURL,
                       blog : blogValue,
-                      createdAt : new Date(),
+                      createdAt : (new Date()).toString(),
                       user : currUser.email
                   }
 
                   db.collection('blogs').add(toStore).then(() => {
-                      router.push("/dashboard");
+                      router.push("/");
                   })
                 
                 });

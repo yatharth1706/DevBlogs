@@ -88,3 +88,47 @@ a {
   width: 100%;
   height: 500px;
 }
+
+a{
+  color:#777777!important;
+}
+
+.MuiFab-label{
+  color: white!important;
+}
+
+.MuiButtonBase-root{
+  background-color: #162353!important;
+}
+
+
+.homepage-container{
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+  padding: 18px;
+  display: flex;
+}
+
+.sidebar{
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.sidebar-link{
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.sidebar-link > svg{
+  margin-right: 5px;
+}
+
+.blogs-container{
+  width: 55%;
+  height: 100px;
+  margin-left : 20px;
+}
