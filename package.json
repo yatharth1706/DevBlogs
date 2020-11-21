@@ -17,6 +17,7 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "17.0.1",
     "react-markdown": "^5.0.2",
+    "react-notifications-component": "^3.0.2",
     "react-syntax-highlighter": "^15.3.0",
     "remark-gfm": "^1.0.0",
     "suneditor-react": "^2.14.4"

@@ -1,9 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Layout from '../layouts/layout';
 import {Form, Card, Button, FormControl, FormLabel, FormGroup, Alert} from 'react-bootstrap';
 import {useAuth} from '../contexts/AuthProvider';
 import {useRouter} from 'next/router';
 import Head from 'next/head';
+import {store} from 'react-notifications-component';
 
 const Login = () => {
     const emailRef = useRef();
@@ -13,6 +14,31 @@ const Login = () => {
 
     const {login, loginWithGoogle} = useAuth();
     const router = useRouter();
+    const notification = {
+        title: "Successfully Signed in!",
+        message: "Configurable",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+        animationOut: ["animate__animated animate__fadeOut"] // `animate.css v4` classes
+      };
+
+      const errorNotification = {
+        title: error,
+        message: "Configurable",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+        animationOut: ["animate__animated animate__fadeOut"] // `animate.css v4` classes
+      }
+
+    useEffect(() => {
+        if(error.trim()!==''){
+            store.addNotification({...errorNotification,container: 'top-right'})
+        }
+    },[error])
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,6 +48,10 @@ const Login = () => {
             setError('');
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
+            store.addNotification({
+                ...notification,
+                container: 'top-right'
+             })
             router.push("/");        
         }catch(error){
             setError(error.message);
