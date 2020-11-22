@@ -15,7 +15,10 @@ import {db} from '../config/firebase.config';
 import {Card, CardActionArea, CardActions, CardContent, CardMedia, Input} from '@material-ui/core';
 import {FormControl, Button} from 'react-bootstrap';
 import Moment from 'moment';
-
+import Markdown from 'react-markdown';
+import gfm from 'remark-gfm';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 export default function Home({posts}) {
     const {currUser} = useAuth();
@@ -39,10 +42,17 @@ export default function Home({posts}) {
                         <h5>All Blogs</h5>
                         {posts.map((post) => <div key = {post.title} style={{width: "760px", height: "auto", display : "flex", flexDirection : "column", boxShadow : "10px 10px 20px lightgray", marginBottom : "40px"}}>
                         <img src= {post.coverPic} alt = "blog cover pic" width = "100%" height = "450px" style={{objectFit : "center"}} />
-                        <article style={{padding: "10px"}}>
+                        <article style={{padding: "20px"}}>
                             <span style={{fontSize : "13px"}}>{Moment(post.createdAt).format('MMMM Do YYYY, h:mm')}</span>
-                            <h3 className = "mt-3" style={{fontWeight : "bold"}}>{post.title}</h3>
-                            <span style={{marginTop :"20px", marginRight : "10px", color: "green"}}>#js</span> <span style={{marginTop :"20px", marginRight : "10px", color: "red"}}>#reactjs</span> <span style={{marginTop : "20px", color: "green"}}>#nextjs</span>
+                            <h3 className = "mt-2" style={{fontWeight : "bold"}}>{post.title}</h3>
+                            <p className = "mt-2">{post.blog.substr(0,40)}.......</p>
+                            <div>
+                                <span style={{marginRight : "10px", color: "green"}}>#js</span> <span style={{marginRight : "10px", color: "red"}}>#reactjs</span> <span style={{color: "green"}}>#nextjs</span>
+                            </div>
+                            <div style={{display: "flex", justifyContent : "space-between", marginTop : "10px"}}>
+                                <span>{post.user}</span>
+                                <span><FavoriteBorderIcon /><BookmarkBorderIcon /></span>
+                            </div>
                         </article>
                         </div>)}
                     </section>
