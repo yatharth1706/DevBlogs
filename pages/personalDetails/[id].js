@@ -75,7 +75,7 @@ const PersonalDetails = () => {
 
             setLoading(true);
             db.collection('users').doc(currUser.uid).set(toStore).then(() => {
-                router.push("/dashboard");
+                router.push("/");
             })
         }
         

@@ -15,8 +15,8 @@ const Login = () => {
     const {login, loginWithGoogle} = useAuth();
     const router = useRouter();
     const notification = {
-        title: "Successfully Signed in!",
-        message: "Configurable",
+        title: "Info",
+        message: "Successfully Signed in!",
         type: "success",
         insert: "top",
         container: "top-right",
@@ -26,7 +26,7 @@ const Login = () => {
 
       const errorNotification = {
         title: error,
-        message: "Configurable",
+        message: "",
         type: "danger",
         insert: "top",
         container: "top-right",
@@ -36,7 +36,9 @@ const Login = () => {
 
     useEffect(() => {
         if(error.trim()!==''){
-            store.addNotification({...errorNotification,container: 'top-right'})
+            store.addNotification({...errorNotification,container: 'top-right',dismiss: {
+                duration: 2000
+            }})
         }
     },[error])
 
@@ -50,7 +52,10 @@ const Login = () => {
             await login(emailRef.current.value, passwordRef.current.value);
             store.addNotification({
                 ...notification,
-                container: 'top-right'
+                container: 'top-right',
+                dismiss: {
+                    duration: 2000
+                }
              })
             router.push("/");        
         }catch(error){
@@ -65,6 +70,13 @@ const Login = () => {
         try {
             setError('');
             await loginWithGoogle();
+            store.addNotification({
+                ...notification,
+                container: 'top-right',
+                dismiss: {
+                    duration: 2000
+                }
+             })
             router.push("/");
             
         } catch (error) {
@@ -90,7 +102,7 @@ const Login = () => {
                             <FormLabel>Password</FormLabel>
                             <FormControl type = "password" placeholder = "Enter password here" ref ={passwordRef} />
                         </FormGroup>
-                        <Button disabled = {loading} className = "w-100" style={{backgroundColor: "#5952cb"}} variant = "primary" type = "submit">Login</Button>
+                        <Button disabled = {loading} className = "w-100" style={{backgroundColor: "#162353"}} variant = "dark" type = "submit">Login</Button>
                         <p className = "text-center mt-3">Or</p>
                         <Button className = "w-100 outline-light" variant = "light" onClick = {googleLogin}><img src="/img/google.png" width={23} height={23} /> Sign in with Google</Button> 
                     </Form>
