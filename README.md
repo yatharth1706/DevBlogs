@@ -1,9 +1,6 @@
-## Home Page
+## Home Page Wireframe
 
-![Home page](https://raw.githubusercontent.com/yatharth1706/DevBlogs/master/public/img/homepage.png)
-
-## Create Blog Page
-![Create Blog Page](https://raw.githubusercontent.com/yatharth1706/DevBlogs/master/public/img/create%20blog.png)
+![Home page](https://raw.githubusercontent.com/yatharth1706/DevBlogs/master/public/img/wireframe.png)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
