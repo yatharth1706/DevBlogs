@@ -67,7 +67,7 @@ const PersonalDetails = () => {
 
         const saveAllUserDataToFirestore = (url) => {
             const toStore = {
-                "displayName" : firstNameRef.current.value + lastNameRef.current.value,
+                "displayName" : firstNameRef.current.value +' ' +  lastNameRef.current.value,
                 "profilePic" : url,
                 "email" : emailRef.current.value,
                 "githubUrl" : githubRef.current.value,

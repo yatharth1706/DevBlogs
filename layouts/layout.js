@@ -28,7 +28,10 @@ const Layout = ({children}) => {
         await logout();
         store.addNotification({
             ...createNotification("Logged out!", "success"),
-            container : "top-right"
+            container : "top-right",
+            dismiss : {
+                "duration" : 3000
+            }
         })
         router.push("/");
     }
