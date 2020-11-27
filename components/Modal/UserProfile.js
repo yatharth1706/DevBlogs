@@ -56,7 +56,7 @@ const UserProfile = (props) => {
           </p>
         </Modal.Body>
         <Modal.Footer>
-  <Button onClick = {isEditClicked === false ? editProfile : updateProfile}>{isEditClicked ? "Update Profile" : "Edit Profile"}</Button>
+      <Button onClick = {isEditClicked === false ? editProfile : updateProfile}>{isEditClicked ? "Update Profile" : "Edit Profile"}</Button>
           <Button onClick={props.onHide} variant = "dark">Close</Button>
         </Modal.Footer>
       </Modal>
