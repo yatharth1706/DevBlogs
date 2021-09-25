@@ -1,11 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Modal, Button, Form, FormLabel, FormGroup, FormControl} from 'react-bootstrap';
+import {db, storage} from '../../config/firebase.config'
 
 const UserProfile = (props) => {
-    
+  const [profilePic, setProfilePic] = useState('');
   const [isEditClicked, setIsEditClicked] = useState(false); 
   const [isProfilePicChanged, setIsProfilePicChanged] = useState(false);
+
+  useEffect(() => {
+    setProfilePic(profilePic.trim() === '' ? (props.userInfo && props.userInfo.profilePic.trim()!=='' ? props.userInfo.profilePic : props.defaultPic) : profilePic);
+  })
 
   const editProfile = () => {
     /** Update isEditClicked state and change all inputs from readonly to readWrite mode */
@@ -17,7 +22,20 @@ const UserProfile = (props) => {
     /** First check if profile pic is changed or not */
     /** Upload to storage and then take the url and store all info to firebase */
     /** Also change isEditClicked to false */
-    setIsEditClicked(!isEditClicked);
+    
+    /** Get all values and update in firestore */
+
+
+  }
+
+
+  const changeProfilePic = (e) => {
+    console.log(e.target.files[0]);
+    let reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+         setProfilePic(reader.result)
+    }
   }
 
   return (
@@ -34,9 +52,9 @@ const UserProfile = (props) => {
         </Modal.Header>
         <Modal.Body>
           <div className = "text-center">
-              <img src = {props.userInfo && props.userInfo.profilePic.trim()!=='' ? props.userInfo.profilePic : props.defaultPic} style={{height: "100px", width: "100px", borderRadius : "50%"}}/>
+              <img src = {profilePic} style={{height: "100px", width: "100px", borderRadius : "50%"}}/>
               <FormGroup style = {{display : isEditClicked ? "block" : "none"}}>
-                <FormControl type = "file"/>
+                <FormControl type = "file" style={{border: "1px solid #ced4da"}} onChange = {changeProfilePic}/>
               </FormGroup>
           </div>
           <h4>Personal Info</h4>
