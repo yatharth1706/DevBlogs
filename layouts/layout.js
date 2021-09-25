@@ -55,7 +55,7 @@ const Layout = ({ children }) => {
               Logout
             </Button>
           ) : (
-            <div>
+            <>
               <Link href="/login">
                 <a>
                   <Button
@@ -71,7 +71,7 @@ const Layout = ({ children }) => {
                   <Button variant="dark">Create account</Button>
                 </a>
               </Link>
-            </div>
+            </>
           )}
         </div>
       </div>

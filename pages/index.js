@@ -40,12 +40,12 @@ export default function Home({ posts }) {
     "https://t3.ftcdn.net/jpg/02/10/49/86/360_F_210498655_ywivjjUe6cgyt52n4BxktRgDCfFg8lKx.jpg";
   const [modalShow, setModalShow] = useState(false);
 
-  useEffect(() => {
-    db.collection("users")
-      .doc(currUser.uid)
-      .get()
-      .then((doc) => setUserInfo(doc.data()));
-  }, []);
+  // useEffect(() => {
+  //   db.collection("users")
+  //     .doc(currUser.uid)
+  //     .get()
+  //     .then((doc) => setUserInfo(doc.data()));
+  // }, []);
 
   useEffect(() => {
     console.log(posts);
@@ -54,7 +54,7 @@ export default function Home({ posts }) {
   return (
     <div className="homepage-container">
       <div className="sidebar">
-        {currUser && (
+        {/* {currUser && (
           <div
             style={{
               display: "flex",
@@ -82,7 +82,7 @@ export default function Home({ posts }) {
               </>
             )}
           </div>
-        )}
+        )} */}
         {currUser ? null : (
           <>
             <div className="sidebar-link">
