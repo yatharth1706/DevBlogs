@@ -3,7 +3,6 @@ import Markdown from "react-markdown";
 import gfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { render } from "react-dom";
 
 const renderers = {
   code: ({ language, value }) => {

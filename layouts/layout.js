@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
           </Link>
         </div>
         <div>
-          <Link href="/posts/create">
+          <Link href="/blog/create">
             <Fab color="dark" aria-label="add" size="small" className="mr-3">
               <AddIcon />
             </Fab>

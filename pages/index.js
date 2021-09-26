@@ -40,21 +40,30 @@ export default function Home({ posts }) {
     "https://t3.ftcdn.net/jpg/02/10/49/86/360_F_210498655_ywivjjUe6cgyt52n4BxktRgDCfFg8lKx.jpg";
   const [modalShow, setModalShow] = useState(false);
 
-  // useEffect(() => {
-  //   db.collection("users")
-  //     .doc(currUser.uid)
-  //     .get()
-  //     .then((doc) => setUserInfo(doc.data()));
-  // }, []);
+  useEffect(() => {
+    if (currUser) {
+      db.collection("users")
+        .doc(currUser.uid)
+        .get()
+        .then((doc) => {
+          console.log("User info");
+          setUserInfo(doc.data());
+        });
+    }
+  }, [currUser]);
 
   useEffect(() => {
     console.log(posts);
   }, [posts]);
 
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
+
   return (
     <div className="homepage-container">
-      <div className="sidebar">
-        {/* {currUser && (
+      <div className="sidebar px-1">
+        {currUser && (
           <div
             style={{
               display: "flex",
@@ -67,7 +76,7 @@ export default function Home({ posts }) {
             onClick={() => setModalShow(true)}
           >
             {userInfo && (
-              <>
+              <div className="py-2 flex">
                 <img
                   src={userInfo.profilePic.trim() !== "" ? userInfo.profilePic : defaultPic}
                   style={{
@@ -79,45 +88,45 @@ export default function Home({ posts }) {
                   alt="profile pic"
                 />{" "}
                 <span>{userInfo.displayName}</span>
-              </>
+              </div>
             )}
           </div>
-        )} */}
+        )}
         {currUser ? null : (
           <>
-            <div className="sidebar-link">
+            <div className="sidebar-link px-2">
               <LoginIcon />
               Sign in
             </div>
-            <div className="sidebar-link">
+            <div className="sidebar-link px-2">
               <SignupIcon />
               Create an account
             </div>
           </>
         )}
         <div
-          className="sidebar-link cursor-pointer"
+          className="sidebar-link cursor-pointer px-2"
           onClick={() => setCurrentSelectedNav("AllBlogs")}
         >
           <BlogIcon />
           All Blogs
         </div>
         <div
-          className="sidebar-link cursor-pointer"
+          className="sidebar-link cursor-pointer px-2"
           onClick={() => setCurrentSelectedNav("Drafts")}
         >
           <DraftIcon />
           Drafts
         </div>
-        <div className="sidebar-link cursor-pointer">
+        <div className="sidebar-link cursor-pointer px-2">
           <TagIcon />
           Tags
         </div>
-        <div className="sidebar-link cursor-pointer">
+        <div className="sidebar-link cursor-pointer px-2">
           <InfoIcon />
           About
         </div>
-        <div className="sidebar-link cursor-pointer">
+        <div className="sidebar-link cursor-pointer px-2">
           <ContactSupportIcon />
           Contact
         </div>
@@ -137,49 +146,51 @@ export default function Home({ posts }) {
             {posts.map(
               (post) =>
                 ((post.type && post.type !== "Draft") || !post.type) && (
-                  <div
-                    key={post.title}
-                    style={{
-                      width: "760px",
-                      height: "auto",
-                      display: "flex",
-                      flexDirection: "column",
-                      boxShadow: "2px 2px 10px #B2B2B2",
-                      marginBottom: "40px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <img
-                      src={post.coverPic}
-                      alt="blog cover pic"
-                      width="100%"
-                      height="450px"
-                      style={{ objectFit: "center" }}
-                    />
-                    <article style={{ padding: "20px" }}>
-                      <span style={{ fontSize: "13px" }}>
-                        {Moment(post.createdAt).format("MMMM Do YYYY, h:mm")}
-                      </span>
-                      <h3 className="mt-2" style={{ fontWeight: "bold" }}>
-                        {post.title}
-                      </h3>
-                      <p className="mt-2">{post.blog.substr(0, 80)}.......</p>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <span>{post.user}</span>
-                        <span>
-                          <FavoriteBorderIcon />
-                          <BookmarkBorderIcon />
+                  <Link href={"/blog/" + post.id}>
+                    <div
+                      key={post.title}
+                      style={{
+                        width: "760px",
+                        height: "auto",
+                        display: "flex",
+                        flexDirection: "column",
+                        boxShadow: "2px 2px 10px #B2B2B2",
+                        marginBottom: "40px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        src={post.coverPic}
+                        alt="blog cover pic"
+                        width="100%"
+                        height="450px"
+                        style={{ objectFit: "center" }}
+                      />
+                      <article style={{ padding: "20px" }}>
+                        <span style={{ fontSize: "13px" }}>
+                          {Moment(post.createdAt).format("MMMM Do YYYY, h:mm")}
                         </span>
-                      </div>
-                    </article>
-                  </div>
+                        <h3 className="mt-2" style={{ fontWeight: "bold" }}>
+                          {post.title}
+                        </h3>
+                        <p className="mt-2">{post.blog.substr(0, 80)}.......</p>
+
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginTop: "10px",
+                          }}
+                        >
+                          <span>{post.user}</span>
+                          <span>
+                            <FavoriteBorderIcon />
+                            <BookmarkBorderIcon />
+                          </span>
+                        </div>
+                      </article>
+                    </div>
+                  </Link>
                 )
             )}
           </section>
@@ -200,7 +211,7 @@ export default function Home({ posts }) {
 export async function getStaticProps() {
   const querySnapshot = await db.collection("blogs").get();
   let posts = [];
-  querySnapshot.forEach((doc) => posts.push(doc.data()));
+  querySnapshot.forEach((doc) => posts.push({ id: doc.id, ...doc.data() }));
 
   return {
     props: { posts },
