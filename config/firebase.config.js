@@ -3,11 +3,6 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 
-console.log("Firebase database url: ");
-console.log(process.env.databaseUrl);
-console.log(process.env.authDomain);
-console.log(process.env.storageBucket);
-
 const config = {
   apiKey: process.env.apiKey,
   authDomain: process.env.authDomain,
