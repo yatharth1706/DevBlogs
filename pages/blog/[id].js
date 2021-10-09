@@ -36,9 +36,9 @@ function BlogPage({ blog }) {
 
   return blogInfo ? (
     <div
-      className="py-10 px-8 mx-auto mt-10 shadow z-10"
+      className="py-10 px-8 mx-auto mt-0 shadow z-10"
       style={{
-        width: "60%",
+        width: "90%",
         height: "auto",
       }}
     >

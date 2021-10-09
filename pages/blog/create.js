@@ -109,14 +109,6 @@ const PostCreate = () => {
       </Head>
       {loading === false ? (
         <>
-          <Navbar
-            bg="light"
-            style={{ backgroundColor: "#f0f3f3", boxShadow: "10px 2px 10px lightgray" }}
-          >
-            <Button variant="light">
-              <img src="/img/left.png" width={20} height={20} />
-            </Button>
-          </Navbar>
           <div style={{ width: "100%", height: "auto", display: "flex" }}>
             {preview ? (
               <Preview
@@ -128,7 +120,7 @@ const PostCreate = () => {
               />
             ) : (
               <div style={{ width: "80%", height: "auto", padding: "30px" }}>
-                <Card style={{ width: "80%", margin: "0 auto" }}>
+                <Card style={{ width: "90%", margin: "0 auto" }}>
                   <Card.Body>
                     <Form>
                       <FormGroup>
