@@ -137,14 +137,18 @@ const Layout = ({ children }) => {
             )}
             {currUser ? null : (
               <>
-                <div className="sidebar-link px-2">
-                  <LoginIcon />
-                  Sign in
-                </div>
-                <div className="sidebar-link px-2">
-                  <SignupIcon />
-                  Create an account
-                </div>
+                <Link href="/login">
+                  <div className="sidebar-link px-2 cursor-pointer">
+                    <LoginIcon />
+                    Sign in
+                  </div>
+                </Link>
+                <Link href="/signup">
+                  <div className="sidebar-link px-2 cursor-pointer">
+                    <SignupIcon />
+                    Create an account
+                  </div>
+                </Link>
               </>
             )}
             <Link href="/">
