@@ -10,7 +10,7 @@ const renderers = {
   },
 };
 
-const Preview = ({ showPreview, contents, backToblog, title, coverPic }) => {
+const Preview = ({ showPreview, contents, backToblog, title, coverPic, coverPicURL }) => {
   return (
     <div
       className="p-10 shadow z-10"
@@ -22,7 +22,7 @@ const Preview = ({ showPreview, contents, backToblog, title, coverPic }) => {
       }}
     >
       <div className="w-full" style={{ height: "500px" }}>
-        <img src={coverPic} className="w-full h-full object-cover" />
+        <img src={coverPic || coverPicURL} className="w-full h-full object-cover" />
       </div>
       <h3 className="font-bold text-6xl mt-5 mb-4">{title}</h3>
       <Markdown renderers={renderers} plugins={[gfm]}>

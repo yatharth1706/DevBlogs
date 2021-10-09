@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthProvider";
 import { useRouter } from "next/router";
@@ -6,10 +6,38 @@ import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Link from "next/link";
 import { store } from "react-notifications-component";
+import LoginIcon from "@material-ui/icons/VpnKey";
+import SignupIcon from "@material-ui/icons/SupervisorAccount";
+import TagIcon from "@material-ui/icons/LocalOffer";
+import FAQIcon from "@material-ui/icons/QuestionAnswer";
+import InfoIcon from "@material-ui/icons/Info";
+import DraftIcon from "@material-ui/icons/Drafts";
+import ContactSupportIcon from "@material-ui/icons/ContactSupport";
+import BlogIcon from "@material-ui/icons/Pages";
+import UserProfile from "../components/Modal/UserProfile";
+import { db } from "../config/firebase.config";
 
 const Layout = ({ children }) => {
   const { currUser, logout } = useAuth();
+  const [userInfo, setUserInfo] = useState();
+  const defaultPic =
+    "https://t3.ftcdn.net/jpg/02/10/49/86/360_F_210498655_ywivjjUe6cgyt52n4BxktRgDCfFg8lKx.jpg";
+  const [modalShow, setModalShow] = useState(false);
+
   const router = useRouter();
+
+  useEffect(() => {
+    if (currUser) {
+      db.collection("users")
+        .doc(currUser.uid)
+        .get()
+        .then((doc) => {
+          console.log("User info");
+          setUserInfo(doc.data());
+          console.log(doc.data());
+        });
+    }
+  }, [currUser]);
 
   const createNotification = (message, type) => {
     const notification = {
@@ -75,7 +103,88 @@ const Layout = ({ children }) => {
           )}
         </div>
       </div>
-      {children}
+      <div className="homepage-container">
+        <div>
+          <div className="sidebar px-1">
+            {currUser && (
+              <div
+                style={{
+                  display: "flex",
+                  lineHeight: "40px",
+                  border: "1px solid white",
+                  borderBottomColor: "lightgray",
+                  marginBottom: "20px",
+                }}
+                className="profilePicHolder"
+                onClick={() => setModalShow(true)}
+              >
+                {userInfo && (
+                  <div className="py-2 flex">
+                    <img
+                      src={userInfo.profilePic.trim() !== "" ? userInfo.profilePic : defaultPic}
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                      }}
+                      alt="profile pic"
+                    />{" "}
+                    <span>{userInfo.displayName}</span>
+                  </div>
+                )}
+              </div>
+            )}
+            {currUser ? null : (
+              <>
+                <div className="sidebar-link px-2">
+                  <LoginIcon />
+                  Sign in
+                </div>
+                <div className="sidebar-link px-2">
+                  <SignupIcon />
+                  Create an account
+                </div>
+              </>
+            )}
+            <Link href="/">
+              <div className="sidebar-link cursor-pointer px-2">
+                {" "}
+                <BlogIcon />
+                All Blogs
+              </div>
+            </Link>
+            {userInfo && (
+              <Link href={"/drafts/" + userInfo.email}>
+                <div className="sidebar-link cursor-pointer px-2">
+                  <DraftIcon />
+                  Drafts
+                </div>
+              </Link>
+            )}
+
+            <div className="sidebar-link cursor-pointer px-2">
+              <TagIcon />
+              Tags
+            </div>
+            <div className="sidebar-link cursor-pointer px-2">
+              <InfoIcon />
+              About
+            </div>
+            <div className="sidebar-link cursor-pointer px-2">
+              <ContactSupportIcon />
+              Contact
+            </div>
+            <UserProfile
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              userInfo={userInfo}
+              defaultPic={defaultPic}
+            />
+          </div>
+        </div>
+        <div className="w-full">{children}</div>
+      </div>
     </div>
   );
 };

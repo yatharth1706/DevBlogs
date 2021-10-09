@@ -86,10 +86,7 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="d-flex w-100 align-items-center justify-content-center"
-      style={{ minHeight: "80vh" }}
-    >
+    <div className="d-flex w-full align-items-center justify-content-center pt-4">
       <Head>
         <title>Login</title>
       </Head>
