@@ -27,7 +27,7 @@ export default function Home({ posts }) {
   }, [currUser]);
 
   return (
-    <div style={{ paddingTop: "30px" }}>
+    <div style={{ paddingTop: "14px" }}>
       <div className="blogs-container" style={{ display: "flex", flexDirection: "column" }}>
         <div className="d-flex mb-3">
           <FormControl

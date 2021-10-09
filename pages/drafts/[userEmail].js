@@ -8,7 +8,7 @@ import { db } from "../../config/firebase.config";
 
 function Drafts({ posts }) {
   return (
-    <div style={{ paddingTop: "30px", display: "flex", flexDirection: "column" }}>
+    <div style={{ paddingTop: "14px", display: "flex", flexDirection: "column" }}>
       <div className="d-flex mb-3">
         <FormControl
           style={{ width: "70%", marginRight: "10px" }}

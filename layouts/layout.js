@@ -163,18 +163,20 @@ const Layout = ({ children }) => {
               </Link>
             )}
 
-            <div className="sidebar-link cursor-pointer px-2">
-              <TagIcon />
-              Tags
-            </div>
-            <div className="sidebar-link cursor-pointer px-2">
-              <InfoIcon />
-              About
-            </div>
-            <div className="sidebar-link cursor-pointer px-2">
-              <ContactSupportIcon />
-              Contact
-            </div>
+            <Link href="/about">
+              <div className="sidebar-link cursor-pointer px-2">
+                <InfoIcon />
+                About
+              </div>
+            </Link>
+
+            <Link href="/contact">
+              <div className="sidebar-link cursor-pointer px-2">
+                <ContactSupportIcon />
+                Contact
+              </div>
+            </Link>
+
             <UserProfile
               show={modalShow}
               onHide={() => setModalShow(false)}
