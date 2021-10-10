@@ -16,6 +16,7 @@ import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import BlogIcon from "@material-ui/icons/Pages";
 import UserProfile from "../components/Modal/UserProfile";
 import { db } from "../config/firebase.config";
+import "tailwindcss/tailwind.css";
 
 const Layout = ({ children }) => {
   const { currUser, logout } = useAuth();
@@ -66,10 +67,15 @@ const Layout = ({ children }) => {
 
   return (
     <div>
-      <div className="flex w-full shadow justify-between px-20 py-2">
+      <div
+        className="flex py-2 shadow"
+        style={{ justifyContent: "space-between", paddingLeft: "90px", paddingRight: "90px" }}
+      >
         <div>
           <Link href="/">
-            <a className="text-2xl font-semibold">DevBlogs</a>
+            <a className="text-2xl font-semibold" style={{ fontSize: "23px", marginTop: "3px" }}>
+              DevBlogs
+            </a>
           </Link>
         </div>
         <div>
