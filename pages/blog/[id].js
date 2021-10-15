@@ -51,7 +51,7 @@ function BlogPage({ blog }) {
       </Markdown>
       <span>{Moment(blogInfo.createdAt).format("MMMM Do YYYY, h:mm")}</span>
       <br />
-      <span className="font-bold">{blogInfo.user}</span>
+      <span className="font-bold mt-2">Created By: {blogInfo.createdBy}</span>
     </div>
   ) : (
     <></>

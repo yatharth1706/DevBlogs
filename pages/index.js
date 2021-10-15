@@ -27,7 +27,7 @@ export default function Home({ posts }) {
   }, [currUser]);
 
   return (
-    <div style={{ paddingTop: "14px" }}>
+    <div style={{ paddingTop: "14px", paddingLeft: "30px" }}>
       <div className="blogs-container" style={{ display: "flex", flexDirection: "column" }}>
         <div className="d-flex mb-3">
           <FormControl
@@ -78,7 +78,9 @@ export default function Home({ posts }) {
                           marginTop: "10px",
                         }}
                       >
-                        <span>{post.user}</span>
+                        <span>
+                          <b>{post.createdBy}</b>
+                        </span>
                         {/* <span>
                             <FavoriteBorderIcon />
                             <BookmarkBorderIcon />

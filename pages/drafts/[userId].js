@@ -8,17 +8,14 @@ import { db } from "../../config/firebase.config";
 
 function Drafts({ posts }) {
   return (
-    <div style={{ paddingTop: "14px", display: "flex", flexDirection: "column" }}>
-      <div className="d-flex mb-3">
-        <FormControl
-          style={{ width: "70%", marginRight: "10px" }}
-          type="text"
-          placeholder="Search any draft here"
-        />
-        <Button style={{ backgroundColor: "#162353" }}>Search</Button>
-      </div>
-      <section>
+    <div
+      style={{ paddingTop: "14px", paddingLeft: "60px", display: "flex", flexDirection: "column" }}
+    >
+      <section className="pt-2">
         <h5>All Drafts</h5>
+        {posts && posts.filter((post) => post.type === "Draft").length === 0 && (
+          <span className="text-xs">No drafts yet</span>
+        )}
         {posts.map(
           (post) =>
             post.type &&
@@ -59,7 +56,7 @@ function Drafts({ posts }) {
                         marginTop: "10px",
                       }}
                     >
-                      <span>{post.user}</span>
+                      <span>{post.createdBy}</span>
                       <span>
                         <FavoriteBorderIcon />
                         <BookmarkBorderIcon />
@@ -76,11 +73,15 @@ function Drafts({ posts }) {
 }
 
 export async function getStaticProps(context) {
-  const { userEmail } = context.params;
+  const { userId } = context.params;
 
   const querySnapshot = await db.collection("blogs").get();
   let posts = [];
-  querySnapshot.forEach((doc) => posts.push({ id: doc.id, ...doc.data() }));
+  querySnapshot.forEach((doc) => {
+    if ((doc.data().userId = userId)) {
+      posts.push({ id: doc.id, ...doc.data() });
+    }
+  });
 
   return {
     props: { posts },
@@ -92,12 +93,12 @@ export async function getStaticPaths() {
   let blogs = await db.collection("blogs").get();
 
   let postPaths = [];
-  blogs.forEach((doc) => postPaths.push({ params: { userEmail: doc.data().user } }));
+  blogs.forEach((doc) => postPaths.push({ params: { userId: doc.data().userId } }));
   console.log(postPaths);
 
   return {
     paths: postPaths,
-    fallback: false,
+    fallback: true,
   };
 }
 

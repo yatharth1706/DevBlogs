@@ -10,20 +10,22 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "autoprefixer": "^9.8.6",
     "bootstrap": "^4.5.3",
     "firebase": "^8.0.1",
     "moment": "^2.29.1",
     "next": "10.0.1",
+    "postcss": "^7.0.38",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.0",
+    "react-dnd": "^14.0.4",
     "react-dom": "17.0.1",
     "react-markdown": "^5.0.2",
     "react-notifications-component": "^3.0.2",
     "react-syntax-highlighter": "^15.3.0",
+    "react-tag-input": "^6.7.3",
     "remark-gfm": "^1.0.0",
     "suneditor-react": "^2.14.4",
-    "autoprefixer": "^9.8.6",
-    "postcss": "^7.0.38",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.14"
   }
 }

@@ -65,8 +65,9 @@ function Drafts(props) {
               coverPic: downloadURL,
               blog: blogValue,
               createdAt: new Date().toString(),
-              user: currUser.email,
+              createdBy: currUser.email,
               type: typ,
+              userId: currUser.uid,
             };
 
             console.log(toStore);
@@ -86,8 +87,9 @@ function Drafts(props) {
         coverPic: props.blog.coverPic ? props.blog.coverPic : "",
         blog: blogValue,
         createdAt: new Date().toString(),
-        user: currUser.email,
+        createdBy: currUser.email,
         type: typ,
+        userId: currUser.uid,
       };
       console.log(toStore);
 
@@ -143,8 +145,8 @@ function Drafts(props) {
                 coverPicURL={props.blog.coverPic}
               />
             ) : (
-              <div style={{ width: "80%", height: "auto", padding: "30px" }}>
-                <Card style={{ width: "90%", margin: "0 auto" }}>
+              <div style={{ width: "85%", height: "auto", padding: "30px" }}>
+                <Card style={{ width: "100%", margin: "0 auto" }}>
                   <Card.Body>
                     <Form>
                       <FormGroup>
@@ -221,9 +223,8 @@ function Drafts(props) {
                 display: "flex",
                 flexDirection: "column",
                 padding: "30px",
-                width: "20%",
+                width: "15%",
                 height: "100%",
-                backgroundColor: "rgb(249,250,250)",
                 position: "absolute",
                 right: 0,
               }}

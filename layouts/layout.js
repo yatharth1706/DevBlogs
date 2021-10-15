@@ -165,7 +165,7 @@ const Layout = ({ children }) => {
               </div>
             </Link>
             {userInfo && (
-              <Link href={"/drafts/" + userInfo.email}>
+              <Link href={"/drafts/" + currUser.uid}>
                 <div className="sidebar-link cursor-pointer px-2">
                   <DraftIcon />
                   Drafts

@@ -16,6 +16,7 @@ const PostCreate = () => {
   const [blogValue, setBlogValue] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [isInteractingWithDatabase, setIsInteractingWithDatabase] = useState(false);
   const [preview, setPreview] = useState(false);
   const [coverPic, setCoverPic] = useState("");
 
@@ -27,21 +28,25 @@ const PostCreate = () => {
     }
   });
 
+  useEffect(() => {
+    console.log(currUser);
+  }, [currUser]);
+
   const saveDraft = () => {};
   const seePreview = () => {
     setPreview(true);
   };
 
-  const publishBlog = (type = "Final") => {
-    saveBannerPicInFireStore(type);
+  const publishBlog = (typ = "Final") => {
+    saveBannerPicInFireStore(typ);
   };
 
-  const saveBannerPicInFireStore = (type) => {
+  const saveBannerPicInFireStore = (typ) => {
     console.log(coverFile);
     const reference = storage().ref();
     const file = coverFile;
     const name = new Date() + "-" + file.name;
-
+    setIsInteractingWithDatabase(true);
     const metadata = {
       contentType: file.type,
     };
@@ -55,24 +60,38 @@ const PostCreate = () => {
         // Handle unsuccessful uploads
       },
       () => {
-        Task.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log("File available at", downloadURL);
-          // now store all data in firestore
-          const toStore = {
-            title,
-            coverPic: downloadURL,
-            blog: blogValue,
-            createdAt: new Date().toString(),
-            user: currUser.email,
-            type: type,
-          };
+        Task.snapshot.ref
+          .getDownloadURL()
+          .then((downloadURL) => {
+            console.log("File available at", downloadURL);
+            // now store all data in firestore
+            const toStore = {
+              title,
+              coverPic: downloadURL,
+              blog: blogValue,
+              createdAt: new Date().toString(),
+              createdBy: currUser.email,
+              type: typ,
+              userId: currUser.uid,
+            };
 
-          db.collection("blogs")
-            .add(toStore)
-            .then(() => {
-              router.push("/");
-            });
-        });
+            console.log(toStore);
+
+            db.collection("blogs")
+              .add(toStore)
+              .then(() => {
+                setIsInteractingWithDatabase(false);
+                router.push("/");
+              })
+              .catch((err) => {
+                alert(err);
+                setIsInteractingWithDatabase(false);
+              });
+          })
+          .catch((err) => {
+            alert(err);
+            setIsInteractingWithDatabase(false);
+          });
       }
     );
   };
@@ -119,8 +138,8 @@ const PostCreate = () => {
                 coverPic={coverPic}
               />
             ) : (
-              <div style={{ width: "80%", height: "auto", padding: "30px" }}>
-                <Card style={{ width: "90%", margin: "0 auto" }}>
+              <div style={{ width: "85%", height: "auto", padding: "30px" }}>
+                <Card style={{ width: "100%", margin: "0 auto" }}>
                   <Card.Body>
                     <Form>
                       <FormGroup>
@@ -187,9 +206,8 @@ const PostCreate = () => {
                 display: "flex",
                 flexDirection: "column",
                 padding: "30px",
-                width: "20%",
+                width: "15%",
                 height: "100%",
-                backgroundColor: "rgb(249,250,250)",
                 position: "absolute",
                 right: 0,
               }}
@@ -201,7 +219,11 @@ const PostCreate = () => {
               >
                 {preview ? "Back" : "Preview"}
               </Button>
-              <Button className="mb-3" style={{ backgroundColor: "#5952CB" }} onClick={publishBlog}>
+              <Button
+                className="mb-3"
+                style={{ backgroundColor: "#5952CB" }}
+                onClick={() => publishBlog("Final")}
+              >
                 Publish
               </Button>
               <p className="text-center">Or</p>

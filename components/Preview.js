@@ -17,7 +17,7 @@ const Preview = ({ showPreview, contents, backToblog, title, coverPic, coverPicU
       style={{
         display: showPreview === true ? "display" : "block",
         padding: "40px",
-        width: "75%",
+        width: "85%",
         height: "auto",
       }}
     >
