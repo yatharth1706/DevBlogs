@@ -1,6 +1,4 @@
 import "../styles/globals.css";
-import "tailwindcss/tailwind.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "../layouts/layout";
 import { AuthProvider } from "../contexts/AuthProvider";
 import ReactNotification from "react-notifications-component";

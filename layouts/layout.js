@@ -67,10 +67,7 @@ const Layout = ({ children }) => {
 
   return (
     <div>
-      <div
-        className="flex py-2 shadow"
-        style={{ justifyContent: "space-between", paddingLeft: "90px", paddingRight: "90px" }}
-      >
+      <div className="w-full flex py-2 shadow justify-between px-8">
         <div>
           <Link href="/">
             <a className="text-2xl font-semibold" style={{ fontSize: "23px", marginTop: "3px" }}>
@@ -78,124 +75,119 @@ const Layout = ({ children }) => {
             </a>
           </Link>
         </div>
-        <div>
+        <div className="flex space-x-3">
           <Link href="/blog/create">
             <Fab color="dark" aria-label="add" size="small" className="mr-3">
               <AddIcon />
             </Fab>
           </Link>
           {currUser ? (
-            <Button style={{ backgrountColor: "#162353" }} onClick={handleLogout}>
+            <a style={{ backgrountColor: "#162353" }} onClick={handleLogout}>
               Logout
-            </Button>
+            </a>
           ) : (
-            <>
+            <div className="flex space-x-3 mt-2 hidden sm:block">
               <Link href="/login">
-                <a>
-                  <Button
-                    className="mr-3"
-                    style={{ backgroundColor: "#162353", border: "1px solid #162353" }}
-                  >
-                    SignIn
-                  </Button>
-                </a>
+                <span
+                  className="px-2 py-2 bg-black rounded text-white cursor-pointer"
+                  style={{ background: "#162353" }}
+                >
+                  SignIn
+                </span>
               </Link>
               <Link href="/signup">
-                <a>
-                  <Button variant="dark">Create account</Button>
-                </a>
+                <span className="cursor-pointer">Create account</span>
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>
-      <div className="homepage-container">
-        <div>
-          <div className="sidebar px-1">
-            {currUser && (
-              <div
-                style={{
-                  display: "flex",
-                  lineHeight: "40px",
-                  border: "1px solid white",
-                  borderBottomColor: "lightgray",
-                  marginBottom: "20px",
-                }}
-                className="profilePicHolder"
-                onClick={() => setModalShow(true)}
-              >
-                {userInfo && (
-                  <div className="py-2 flex">
-                    <img
-                      src={userInfo.profilePic.trim() !== "" ? userInfo.profilePic : defaultPic}
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "50%",
-                        marginRight: "10px",
-                      }}
-                      alt="profile pic"
-                    />{" "}
-                    <span>{userInfo.displayName}</span>
-                  </div>
-                )}
-              </div>
-            )}
-            {currUser ? null : (
-              <>
-                <Link href="/login">
-                  <div className="sidebar-link px-2 cursor-pointer">
-                    <LoginIcon />
-                    Sign in
-                  </div>
-                </Link>
-                <Link href="/signup">
-                  <div className="sidebar-link px-2 cursor-pointer">
-                    <SignupIcon />
-                    Create an account
-                  </div>
-                </Link>
-              </>
-            )}
-            <Link href="/">
-              <div className="sidebar-link cursor-pointer px-2">
-                {" "}
-                <BlogIcon />
-                All Blogs
-              </div>
-            </Link>
-            {userInfo && (
-              <Link href={"/drafts/" + (currUser && currUser.uid)}>
-                <div className="sidebar-link cursor-pointer px-2">
-                  <DraftIcon />
-                  Drafts
+      <div className="flex flex-col lg:flex-row">
+        <div className="px-6 py-8 hidden lg:block">
+          {currUser && (
+            <div
+              style={{
+                display: "flex",
+                lineHeight: "40px",
+                border: "1px solid white",
+                borderBottomColor: "lightgray",
+                marginBottom: "20px",
+              }}
+              className="profilePicHolder"
+              onClick={() => setModalShow(true)}
+            >
+              {userInfo && (
+                <div className="py-2 flex">
+                  <img
+                    src={userInfo.profilePic.trim() !== "" ? userInfo.profilePic : defaultPic}
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      marginRight: "10px",
+                    }}
+                    alt="profile pic"
+                  />{" "}
+                  <span>{userInfo.displayName}</span>
+                </div>
+              )}
+            </div>
+          )}
+          {currUser ? null : (
+            <>
+              <Link href="/login">
+                <div className="sidebar-link px-2 cursor-pointer">
+                  <LoginIcon />
+                  Sign in
                 </div>
               </Link>
-            )}
-
-            <Link href="/about">
+              <Link href="/signup">
+                <div className="sidebar-link px-2 cursor-pointer">
+                  <SignupIcon />
+                  Create an account
+                </div>
+              </Link>
+            </>
+          )}
+          <Link href="/">
+            <div className="sidebar-link cursor-pointer px-2">
+              {" "}
+              <BlogIcon />
+              All Blogs
+            </div>
+          </Link>
+          {userInfo && (
+            <Link href={"/drafts/" + (currUser && currUser.uid)}>
               <div className="sidebar-link cursor-pointer px-2">
-                <InfoIcon />
-                About
+                <DraftIcon />
+                Drafts
               </div>
             </Link>
+          )}
 
-            <Link href="/contact">
-              <div className="sidebar-link cursor-pointer px-2">
-                <ContactSupportIcon />
-                Contact
-              </div>
-            </Link>
+          <Link href="/about">
+            <div className="sidebar-link cursor-pointer px-2">
+              <InfoIcon />
+              About
+            </div>
+          </Link>
 
-            <UserProfile
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-              userInfo={userInfo}
-              defaultPic={defaultPic}
-            />
-          </div>
+          <Link href="/contact">
+            <div className="sidebar-link cursor-pointer px-2">
+              <ContactSupportIcon />
+              Contact
+            </div>
+          </Link>
+
+          <UserProfile
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            userInfo={userInfo}
+            defaultPic={defaultPic}
+          />
         </div>
-        <div className="w-full">{children}</div>
+
+        <div className="w-full lg:w-4/6">{children}</div>
       </div>
     </div>
   );

@@ -47,125 +47,117 @@ export default function Home({ posts }) {
   };
 
   return (
-    <div style={{ paddingTop: "14px", paddingLeft: "30px" }}>
-      <div className="blogs-container" style={{ display: "flex", flexDirection: "column" }}>
+    <div className="w-full px-8 py-4">
+      <div className="w-full py-4">
         <div className="d-flex mb-3">
-          <FormControl
+          <input
+            className="border p-2 outline-none"
             style={{ width: "70%", marginRight: "10px" }}
             type="text"
             placeholder="Search any blog here"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
-          <Button style={{ backgroundColor: "#162353" }}>Search</Button>
+          <span
+            className="cursor-pointer text-white rounded px-2 py-2 w-20"
+            style={{ backgroundColor: "#162353" }}
+          >
+            Search
+          </span>
         </div>
-        <section>
-          <h5>All Blogs</h5>
-          {filteredPosts.length > 0
-            ? filteredPosts.map(
-                (post) =>
-                  ((post.type && post.type !== "Draft") || !post.type) && (
-                    <Link href={"/blog/" + post.id}>
-                      <div
-                        key={post.title}
-                        style={{
-                          width: "760px",
-                          height: "auto",
-                          display: "flex",
-                          flexDirection: "column",
-                          boxShadow: "2px 2px 10px #B2B2B2",
-                          marginBottom: "40px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <img
-                          src={post.coverPic}
-                          alt="blog cover pic"
-                          width="100%"
-                          height="450px"
-                          style={{ objectFit: "center" }}
-                        />
-                        <article style={{ padding: "20px" }}>
-                          <span style={{ fontSize: "13px" }}>
-                            {Moment(post.createdAt).format("MMMM Do YYYY, h:mm")}
-                          </span>
-                          <h3 className="mt-2" style={{ fontWeight: "bold" }}>
-                            {post.title}
-                          </h3>
-                          <p className="mt-2">{post.blog.substr(0, 80)}.......</p>
-
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              marginTop: "10px",
-                            }}
-                          >
-                            <span>
-                              <b>{post.createdBy}</b>
+        <section className="py-2">
+          <h5 className="mb-3">All Blogs</h5>
+          <div>
+            {filteredPosts.length > 0
+              ? filteredPosts.map(
+                  (post) =>
+                    ((post.type && post.type !== "Draft") || !post.type) && (
+                      <Link href={"/blog/" + post.id}>
+                        <div
+                          key={post.title}
+                          className="flex flex-col shadow h-auto w-full mb-8 rounded"
+                        >
+                          <img
+                            src={post.coverPic}
+                            alt="blog cover pic"
+                            width="100%"
+                            height="450px"
+                            style={{ objectFit: "center" }}
+                          />
+                          <article style={{ padding: "20px" }}>
+                            <span style={{ fontSize: "13px" }}>
+                              {Moment(post.createdAt).format("MMMM Do YYYY, h:mm")}
                             </span>
-                            {/* <span>
+                            <h3 className="mt-2" style={{ fontWeight: "bold" }}>
+                              {post.title}
+                            </h3>
+                            <p className="mt-2">{post.blog.substr(0, 80)}.......</p>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginTop: "10px",
+                              }}
+                            >
+                              <span>
+                                <b>{post.createdBy}</b>
+                              </span>
+                              {/* <span>
                             <FavoriteBorderIcon />
                             <BookmarkBorderIcon />
                           </span> */}
-                          </div>
-                        </article>
-                      </div>
-                    </Link>
-                  )
-              )
-            : posts.map(
-                (post) =>
-                  ((post.type && post.type !== "Draft") || !post.type) && (
-                    <Link href={"/blog/" + post.id}>
-                      <div
-                        key={post.title}
-                        style={{
-                          width: "760px",
-                          height: "auto",
-                          display: "flex",
-                          flexDirection: "column",
-                          boxShadow: "2px 2px 10px #B2B2B2",
-                          marginBottom: "40px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <img
-                          src={post.coverPic}
-                          alt="blog cover pic"
-                          width="100%"
-                          height="450px"
-                          style={{ objectFit: "center" }}
-                        />
-                        <article style={{ padding: "20px" }}>
-                          <span style={{ fontSize: "13px" }}>
-                            {Moment(post.createdAt).format("MMMM Do YYYY, h:mm")}
-                          </span>
-                          <h3 className="mt-2" style={{ fontWeight: "bold" }}>
-                            {post.title}
-                          </h3>
-                          <p className="mt-2">{post.blog.substr(0, 80)}.......</p>
-
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              marginTop: "10px",
-                            }}
-                          >
-                            <span>
-                              <b>{post.createdBy}</b>
+                            </div>
+                          </article>
+                        </div>
+                      </Link>
+                    )
+                )
+              : posts.map(
+                  (post) =>
+                    ((post.type && post.type !== "Draft") || !post.type) && (
+                      <Link href={"/blog/" + post.id}>
+                        <div
+                          key={post.title}
+                          className="flex flex-col shadow h-auto w-full mb-8 rounded"
+                        >
+                          <img
+                            src={post.coverPic}
+                            alt="blog cover pic"
+                            width="100%"
+                            height="450px"
+                            style={{ objectFit: "center" }}
+                          />
+                          <article style={{ padding: "20px" }}>
+                            <span style={{ fontSize: "13px" }}>
+                              {Moment(post.createdAt).format("MMMM Do YYYY, h:mm")}
                             </span>
-                            {/* <span>
+                            <h3 className="mt-2" style={{ fontWeight: "bold" }}>
+                              {post.title}
+                            </h3>
+                            <p className="mt-2">{post.blog.substr(0, 80)}.......</p>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginTop: "10px",
+                              }}
+                            >
+                              <span>
+                                <b>{post.createdBy}</b>
+                              </span>
+                              {/* <span>
                             <FavoriteBorderIcon />
                             <BookmarkBorderIcon />
                           </span> */}
-                          </div>
-                        </article>
-                      </div>
-                    </Link>
-                  )
-              )}
+                            </div>
+                          </article>
+                        </div>
+                      </Link>
+                    )
+                )}
+          </div>
         </section>
       </div>
     </div>
