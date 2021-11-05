@@ -35,23 +35,17 @@ function BlogPage({ blog }) {
   };
 
   return blogInfo ? (
-    <div
-      className="py-10 px-8 mx-auto mt-0 shadow z-10"
-      style={{
-        width: "90%",
-        height: "auto",
-      }}
-    >
-      <div className="w-full" style={{ height: "500px" }}>
-        <img src={blogInfo.coverPic} className="w-full h-full object-cover" />
+    <div className="p-2">
+      <div className="py-10 px-8 mx-auto mt-0 shadow z-10 w-full mt-8">
+        <img src={blogInfo.coverPic} className="w-full" />
+        <h3 className="font-bold text-6xl mt-5 mb-4">{blogInfo.title}</h3>
+        <Markdown renderers={renderers} plugins={[gfm]}>
+          {blogInfo.blog}
+        </Markdown>
+        <span>{Moment(blogInfo.createdAt).format("MMMM Do YYYY, h:mm")}</span>
+        <br />
+        <span className="font-bold mt-2">Created By: {blogInfo.createdBy}</span>
       </div>
-      <h3 className="font-bold text-6xl mt-5 mb-4">{blogInfo.title}</h3>
-      <Markdown renderers={renderers} plugins={[gfm]}>
-        {blogInfo.blog}
-      </Markdown>
-      <span>{Moment(blogInfo.createdAt).format("MMMM Do YYYY, h:mm")}</span>
-      <br />
-      <span className="font-bold mt-2">Created By: {blogInfo.createdBy}</span>
     </div>
   ) : (
     <></>
