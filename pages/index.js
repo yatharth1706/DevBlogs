@@ -66,7 +66,7 @@ export default function Home({ posts }) {
           </span>
         </div>
         <section className="py-2">
-          <h5 className="mb-3">All Blogs</h5>
+          <h5 className="mb-3 text-lg ">All Blogs</h5>
           <div>
             {filteredPosts.length > 0
               ? filteredPosts.map(

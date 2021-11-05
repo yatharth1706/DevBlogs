@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Card, Button, Form, FormGroup, FormControl, Navbar, Nav, Spinner } from "react-bootstrap";
+import { Card, button, Form, FormGroup, FormControl, Navbar, Nav, Spinner } from "react-bootstrap";
 import Suneditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 import Head from "next/head";
@@ -138,34 +138,34 @@ const PostCreate = () => {
                 coverPic={coverPic}
               />
             ) : (
-              <div style={{ width: "85%", height: "auto", padding: "30px" }}>
-                <Card style={{ width: "100%", margin: "0 auto" }}>
-                  <Card.Body>
-                    <Form>
-                      <FormGroup>
-                        <Form.Label>Title</Form.Label>
-                        <FormControl
+              <div className="flex shadow w-full mt-8 ml-2 p-8">
+                <div style={{ width: "100%", margin: "0 auto" }}>
+                  <div>
+                    <form>
+                      <div className="flex flex-col mb-2">
+                        <label className="mb-1">Title</label>
+                        <input
                           type="text"
                           placeholder="Enter title of your blog"
                           onChange={setTitle}
                           value={title}
+                          className="border outline-none p-2 rounded"
                         />
-                      </FormGroup>
-                      <Form.Group>
-                        <Form.Label>Cover Image</Form.Label>
-                        <br />
+                      </div>
+                      <div className="flex flex-col mb-2">
+                        <label className="mb-1">Cover Image</label>
                         {coverPic ? (
                           <>
-                            <Button
+                            <button
                               className="mr-3"
                               style={{ backgroundColor: "#5952cb" }}
                               onClick={changeCoverPic}
                             >
                               Change
-                            </Button>
-                            <Button variant="dark" onClick={() => setCoverPic("")}>
+                            </button>
+                            <button variant="dark" onClick={() => setCoverPic("")}>
                               Remove
-                            </Button>
+                            </button>
                             <Form.File
                               id="coverPicFileChooser2"
                               style={{
@@ -185,19 +185,19 @@ const PostCreate = () => {
                             placeholder="asdf"
                           />
                         )}
-                      </Form.Group>
-                      <FormGroup>
-                        <Form.Label>Blog</Form.Label>
-                        <FormControl
-                          as="textarea"
-                          rows={15}
+                      </div>
+                      <div className="flex flex-col mb-2">
+                        <label className="mb-1">Blog</label>
+                        <textarea
+                          rows="10"
                           onChange={handleChange}
                           value={blogValue}
+                          className="border outline-none p-2 rounded"
                         />
-                      </FormGroup>
-                    </Form>
-                  </Card.Body>
-                </Card>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             )}
             <div
@@ -212,24 +212,24 @@ const PostCreate = () => {
                 right: 0,
               }}
             >
-              <Button
+              <button
                 className="mb-4"
                 style={{ backgroundColor: "#5952CB" }}
                 onClick={preview ? backToblog : seePreview}
               >
                 {preview ? "Back" : "Preview"}
-              </Button>
-              <Button
+              </button>
+              <button
                 className="mb-3"
                 style={{ backgroundColor: "#5952CB" }}
                 onClick={() => publishBlog("Final")}
               >
                 Publish
-              </Button>
+              </button>
               <p className="text-center">Or</p>
-              <Button variant="dark" onClick={() => publishBlog("Draft")}>
+              <button variant="dark" onClick={() => publishBlog("Draft")}>
                 Save as draft
-              </Button>
+              </button>
             </div>
           </div>
         </>
