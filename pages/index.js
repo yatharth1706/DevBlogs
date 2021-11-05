@@ -75,7 +75,7 @@ export default function Home({ posts }) {
                       <Link href={"/blog/" + post.id}>
                         <div
                           key={post.title}
-                          className="flex flex-col shadow h-auto w-full mb-8 rounded"
+                          className="flex flex-col shadow h-auto w-full mb-8 rounded cursor-pointer"
                         >
                           <img
                             src={post.coverPic}
@@ -119,7 +119,7 @@ export default function Home({ posts }) {
                       <Link href={"/blog/" + post.id}>
                         <div
                           key={post.title}
-                          className="flex flex-col shadow h-auto w-full mb-8 rounded"
+                          className="flex flex-col shadow h-auto w-full mb-8 rounded cursor-pointer"
                         >
                           <img
                             src={post.coverPic}

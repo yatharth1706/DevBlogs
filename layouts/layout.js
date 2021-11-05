@@ -82,7 +82,11 @@ const Layout = ({ children }) => {
             </Fab>
           </Link>
           {currUser ? (
-            <a style={{ backgrountColor: "#162353" }} onClick={handleLogout}>
+            <a
+              style={{ backgrountColor: "#162353" }}
+              className="cursor-pointer mt-2"
+              onClick={handleLogout}
+            >
               Logout
             </a>
           ) : (
