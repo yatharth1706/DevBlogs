@@ -128,7 +128,7 @@ const PostCreate = () => {
       </Head>
       {loading === false ? (
         <>
-          <div style={{ width: "100%", height: "auto", display: "flex" }}>
+          <div style={{ width: "100%", height: "auto" }} className="flex flex-col">
             {preview ? (
               <Preview
                 showPreview={preview}
@@ -138,7 +138,7 @@ const PostCreate = () => {
                 coverPic={coverPic}
               />
             ) : (
-              <div className="flex shadow w-full mt-8 ml-2 p-8">
+              <div className="flex shadow mt-8 ml-2 p-8 w-full">
                 <div style={{ width: "100%", margin: "0 auto" }}>
                   <div>
                     <form>
@@ -155,41 +155,45 @@ const PostCreate = () => {
                       <div className="flex flex-col mb-2">
                         <label className="mb-1">Cover Image</label>
                         {coverPic ? (
-                          <>
+                          <div className="flex space-x-2">
                             <button
-                              className="mr-3"
+                              className="mr-3 p-2 rounded text-white"
                               style={{ backgroundColor: "#5952cb" }}
                               onClick={changeCoverPic}
                             >
                               Change
                             </button>
-                            <button variant="dark" onClick={() => setCoverPic("")}>
+                            <button
+                              className="bg-gray-100 rounded p-2 "
+                              variant="dark"
+                              onClick={() => setCoverPic("")}
+                            >
                               Remove
                             </button>
                             <Form.File
                               id="coverPicFileChooser2"
                               style={{
-                                border: "1px solid lightgray",
+                                border: "1px solid #e8e8e8",
                                 padding: "10px",
                                 display: "none",
                               }}
                               onChange={saveCoverPic}
                               placeholder="asdf"
                             />
-                          </>
+                          </div>
                         ) : (
                           <Form.File
                             id="coverPicFileChooser1"
-                            style={{ border: "1px solid lightgray", padding: "10px" }}
+                            style={{ border: "1px solid #e8e8e8", padding: "10px" }}
                             onChange={saveCoverPic}
                             placeholder="asdf"
                           />
                         )}
                       </div>
-                      <div className="flex flex-col mb-2">
+                      <div className="flex flex-col mb-2 ">
                         <label className="mb-1">Blog</label>
                         <textarea
-                          rows="10"
+                          rows="12"
                           onChange={handleChange}
                           value={blogValue}
                           className="border outline-none p-2 rounded"
@@ -201,33 +205,31 @@ const PostCreate = () => {
               </div>
             )}
             <div
-              className="sidebar mt-1"
+              className="w-full mt-1 flex space-x-3 p-2"
               style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: "30px",
-                width: "15%",
                 height: "100%",
-                position: "absolute",
-                right: 0,
               }}
             >
               <button
-                className="mb-4"
+                className="text-white rounded p-2"
                 style={{ backgroundColor: "#5952CB" }}
                 onClick={preview ? backToblog : seePreview}
               >
                 {preview ? "Back" : "Preview"}
               </button>
               <button
-                className="mb-3"
+                className=" p-2 rounded text-white"
                 style={{ backgroundColor: "#5952CB" }}
                 onClick={() => publishBlog("Final")}
               >
                 Publish
               </button>
-              <p className="text-center">Or</p>
-              <button variant="dark" onClick={() => publishBlog("Draft")}>
+
+              <button
+                className="bg-gray-100 p-2 rounded"
+                variant="dark"
+                onClick={() => publishBlog("Draft")}
+              >
                 Save as draft
               </button>
             </div>
