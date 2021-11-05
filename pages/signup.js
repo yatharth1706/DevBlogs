@@ -3,6 +3,7 @@ import Layout from "../layouts/layout";
 import { useAuth } from "../contexts/AuthProvider";
 import { useRouter } from "next/router";
 import { store } from "react-notifications-component";
+import Head from "next/head";
 
 const Signup = () => {
   const emailRef = useRef();
@@ -86,6 +87,9 @@ const Signup = () => {
 
   return (
     <div className="px-4 d-flex w-full align-items-center justify-content-center pt-4">
+      <Head>
+        <title>Signup</title>
+      </Head>
       <div className="shadow p-8 w-full md:w-3/6 mx-auto my-6">
         <div className="mb-3">
           <h3 className="text-xl">Sign Up</h3>
@@ -132,7 +136,7 @@ const Signup = () => {
             </button>
             <p className="text-center mt-3">Or</p>
             <button
-              className="w-full p-2"
+              className="w-full p-2 bg-gray-100 p-2"
               onClick={googleLogin}
               variant="light"
               style={{ display: "flex", justifyContent: "center" }}

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../layouts/layout";
-import { Form, Card, Button, FormControl, FormLabel, FormGroup, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthProvider";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -86,37 +85,47 @@ const Login = () => {
   };
 
   return (
-    <div className="d-flex w-full align-items-center justify-content-center pt-4">
+    <div className="px-4 d-flex w-full align-items-center justify-content-center pt-4">
       <Head>
         <title>Login</title>
       </Head>
-      <Card style={{ width: "380px" }}>
-        <Card.Header>
-          <h3>Login</h3>
-        </Card.Header>
-        <Card.Body>
+      <div className="shadow p-8 w-full md:w-3/6 mx-auto my-6">
+        <div className="mb-3">
+          <h3 className="text-xl">Login</h3>
+        </div>
+        <div>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleLogin}>
-            <FormGroup>
-              <FormLabel>Email</FormLabel>
-              <FormControl type="email" placeholder="Enter email here" ref={emailRef} />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Password</FormLabel>
-              <FormControl type="password" placeholder="Enter password here" ref={passwordRef} />
-            </FormGroup>
-            <Button
+          <form onSubmit={handleLogin}>
+            <div className="flex flex-col mb-2">
+              <label className="mb-1">Email</label>
+              <input
+                className="outline-none border px-2 py-1 rounded"
+                type="email"
+                placeholder="Enter email here"
+                ref={emailRef}
+              />
+            </div>
+            <div className="flex flex-col mb-2">
+              <label className="mb-1">Password</label>
+              <input
+                className="outline-none border px-2 py-1 rounded"
+                type="password"
+                placeholder="Enter password here"
+                ref={passwordRef}
+              />
+            </div>
+            <button
               disabled={loading}
-              className="w-100"
+              className="mt-3 w-full p-2 text-white rounded"
               style={{ backgroundColor: "#162353" }}
               variant="dark"
               type="submit"
             >
               Login
-            </Button>
+            </button>
             <p className="text-center mt-3">Or</p>
-            <Button
-              className="w-100 outline-light"
+            <button
+              className="w-full mt-2 bg-gray-100 p-2"
               variant="light"
               onClick={googleLogin}
               style={{ display: "flex", justifyContent: "center" }}
@@ -125,10 +134,10 @@ const Login = () => {
                 <img src="/img/google.png" width={23} height={23} className="mr-2" /> Sign in with
                 Google
               </span>
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
