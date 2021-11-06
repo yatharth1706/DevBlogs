@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Form, FormGroup, FormControl, Navbar, Nav, Spinner } from "react-bootstrap";
 import Suneditor from "suneditor-react";
+import { Form, FormControl } from "react-bootstrap";
 import "suneditor/dist/css/suneditor.min.css";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -134,7 +134,7 @@ function Drafts(props) {
       </Head>
       {loading === false ? (
         <>
-          <div style={{ width: "100%", height: "auto", display: "flex" }}>
+          <div style={{ width: "100%", height: "auto" }} className="flex flex-col">
             {preview ? (
               <Preview
                 showPreview={preview}
@@ -145,32 +145,32 @@ function Drafts(props) {
                 coverPicURL={props.blog.coverPic}
               />
             ) : (
-              <div style={{ width: "85%", height: "auto", padding: "30px" }}>
-                <Card style={{ width: "100%", margin: "0 auto" }}>
-                  <Card.Body>
-                    <Form>
-                      <FormGroup>
-                        <Form.Label>Title</Form.Label>
-                        <FormControl
+              <div className="flex shadow mt-8 ml-2 p-8 w-full">
+                <div style={{ width: "100%", margin: "0 auto" }}>
+                  <div>
+                    <form>
+                      <div className="flex flex-col mb-2">
+                        <label className="mb-1">Title</label>
+                        <input
                           type="text"
                           placeholder="Enter title of your blog"
                           onChange={setTitle}
                           value={title}
+                          className="border outline-none p-2 rounded"
                         />
-                      </FormGroup>
-                      <Form.Group>
-                        <Form.Label>Cover Image</Form.Label>
-                        <br />
+                      </div>
+                      <div className="flex flex-col mb-2">
+                        <label className="mb-1">Cover Image</label>
                         {coverPic ? (
                           <>
-                            <Button
+                            <button
                               className="mr-3"
                               style={{ backgroundColor: "#5952cb" }}
                               onClick={changeCoverPic}
                             >
                               Change
-                            </Button>
-                            <Button
+                            </button>
+                            <button
                               variant="dark"
                               onClick={() => {
                                 setCoverPic("");
@@ -178,11 +178,11 @@ function Drafts(props) {
                               }}
                             >
                               Remove
-                            </Button>
+                            </button>
                             <Form.File
                               id="coverPicFileChooser2"
                               style={{
-                                border: "1px solid lightgray",
+                                border: "1px solid #e7e7e7",
                                 padding: "10px",
                                 display: "none",
                               }}
@@ -193,67 +193,64 @@ function Drafts(props) {
                         ) : (
                           <Form.File
                             id="coverPicFileChooser1"
-                            style={{ border: "1px solid lightgray", padding: "10px" }}
+                            style={{ border: "1px solid #e7e7e7", padding: "10px" }}
                             onChange={saveCoverPic}
                             placeholder="asdf"
                           />
                         )}
 
                         {!coverFile && (
-                          <FormControl type="text" disabled={true} value={props.blog.coverPic} />
+                          <input
+                            className="border outline-none p-2 rounded"
+                            type="text"
+                            disabled={true}
+                            value={props.blog.coverPic}
+                          />
                         )}
-                      </Form.Group>
-                      <FormGroup>
-                        <Form.Label>Blog</Form.Label>
-                        <FormControl
-                          as="textarea"
-                          rows={15}
+                      </div>
+                      <div className="flex flex-col mb-2">
+                        <label className="mb-1">Blog</label>
+
+                        <textarea
+                          className="border outline-none p-2 rounded"
+                          rows="15"
                           onChange={handleChange}
                           value={blogValue}
                         />
-                      </FormGroup>
-                    </Form>
-                  </Card.Body>
-                </Card>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             )}
-            <div
-              className="sidebar mt-1"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: "30px",
-                width: "15%",
-                height: "100%",
-                position: "absolute",
-                right: 0,
-              }}
-            >
-              <Button
-                className="mb-4"
+            <div className="w-full mt-1 flex space-x-3 p-2">
+              <button
+                className="text-white rounded p-2"
                 style={{ backgroundColor: "#5952CB" }}
                 onClick={preview ? backToblog : seePreview}
               >
                 {preview ? "Back" : "Preview"}
-              </Button>
-              <Button
-                className="mb-3"
+              </button>
+              <button
+                className="text-white rounded p-2"
                 style={{ backgroundColor: "#5952CB" }}
                 onClick={() => publishBlog("Final")}
               >
                 Publish
-              </Button>
-              <p className="text-center">Or</p>
-              <Button variant="dark" onClick={() => publishBlog("Draft")}>
+              </button>
+              <p className="text-center mt-2">Or</p>
+              <button
+                className="bg-gray-100 p-2 rounded"
+                variant="dark"
+                onClick={() => publishBlog("Draft")}
+              >
                 Save as draft
-              </Button>
+              </button>
             </div>
           </div>
         </>
       ) : (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
+        <></>
       )}
     </>
   );

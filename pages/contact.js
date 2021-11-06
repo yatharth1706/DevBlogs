@@ -28,13 +28,13 @@ function contact() {
         </div>
 
         <div>
-          <a href="http://github.com/yatharth1706" target="_blank">
+          <a href="https://twitter.com/yatharth170699" target="_blank">
             <TwitterIcon />
           </a>
         </div>
 
         <div>
-          <a href="http://github.com/yatharth1706" target="_blank">
+          <a href="https://instagram.com/web_dev_yatharth" target="_blank">
             <InstaIcon />
           </a>
         </div>

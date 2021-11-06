@@ -8,11 +8,9 @@ import { db } from "../../config/firebase.config";
 
 function Drafts({ posts }) {
   return (
-    <div
-      style={{ paddingTop: "14px", paddingLeft: "60px", display: "flex", flexDirection: "column" }}
-    >
+    <div className="w-full px-4 mt-8">
       <section className="pt-2">
-        <h5>All Drafts</h5>
+        <h5 className="text-lg mb-4">All Drafts</h5>
         {posts && posts.filter((post) => post.type === "Draft").length === 0 && (
           <span className="text-xs">No drafts yet</span>
         )}
@@ -23,15 +21,7 @@ function Drafts({ posts }) {
               <Link href={"/blog/draft/" + post.id}>
                 <div
                   key={post.title}
-                  style={{
-                    width: "760px",
-                    height: "auto",
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "2px 2px 10px #B2B2B2",
-                    marginBottom: "40px",
-                    cursor: "pointer",
-                  }}
+                  className="flex flex-col shadow h-auto w-full mb-8 rounded cursor-pointer"
                 >
                   <img
                     src={post.coverPic}

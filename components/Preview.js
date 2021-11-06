@@ -21,9 +21,7 @@ const Preview = ({ showPreview, contents, backToblog, title, coverPic, coverPicU
         height: "auto",
       }}
     >
-      <div className="w-full" style={{ height: "500px" }}>
-        <img src={coverPic || coverPicURL} className="w-full h-full object-cover" />
-      </div>
+      <img src={coverPic || coverPicURL} className="w-full" />
       <h3 className="font-bold text-6xl mt-5 mb-4">{title}</h3>
       <Markdown renderers={renderers} plugins={[gfm]}>
         {contents}

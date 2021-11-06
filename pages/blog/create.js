@@ -204,12 +204,7 @@ const PostCreate = () => {
                 </div>
               </div>
             )}
-            <div
-              className="w-full mt-1 flex space-x-3 p-2"
-              style={{
-                height: "100%",
-              }}
-            >
+            <div className="w-full mt-1 flex space-x-3 p-2">
               <button
                 className="text-white rounded p-2"
                 style={{ backgroundColor: "#5952CB" }}
