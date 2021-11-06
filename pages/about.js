@@ -2,7 +2,7 @@ import React from "react";
 
 function about() {
   return (
-    <div style={{ paddingTop: "14px", width: "80%" }}>
+    <div className="w-full h-auto px-8 mt-8">
       <h5>About</h5>
       <p>
         Welcome, to DevBlogs. Its actually a side project that I have built. In this website

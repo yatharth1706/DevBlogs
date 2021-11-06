@@ -16,7 +16,7 @@ import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import BlogIcon from "@material-ui/icons/Pages";
 import UserProfile from "../components/Modal/UserProfile";
 import BarIcon from "@material-ui/icons/Dehaze";
-import CloseIcon from "@material-ui/icons/Cancel";
+import CloseIcon from "@material-ui/icons/Close";
 import { db } from "../config/firebase.config";
 import "tailwindcss/tailwind.css";
 
@@ -130,7 +130,6 @@ const Layout = ({ children }) => {
                   marginBottom: "20px",
                 }}
                 className="profilePicHolder"
-                onClick={() => setModalShow(true)}
               >
                 {userInfo && (
                   <div className="py-2 flex" onClick={() => setNavState(!navState)}>
@@ -209,7 +208,6 @@ const Layout = ({ children }) => {
                 marginBottom: "20px",
               }}
               className="profilePicHolder"
-              onClick={() => setModalShow(true)}
             >
               {userInfo && (
                 <div className="py-2 flex">
@@ -251,7 +249,7 @@ const Layout = ({ children }) => {
               All Blogs
             </div>
           </Link>
-          {userInfo && (
+          {currUser && (
             <Link href={"/drafts/" + (currUser && currUser.uid)}>
               <div className="sidebar-link cursor-pointer px-2">
                 <DraftIcon />
