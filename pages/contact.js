@@ -5,37 +5,37 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 
 function contact() {
   return (
-    <div style={{ paddingTop: "14px", width: "80%", marginLeft: "10px" }}>
+    <div className="w-full px-4 mt-8">
       <h5>Contact</h5>
-      <div className="grid grid-cols-3 mt-4">
-        <div className="shadow h-20 px-3 py-4 mb-2" style={{ width: "370px" }}>
-          <GithubIcon />
+      <div className="flex flex-col justify-center items-center">
+        <div className="w-40 h-40 rounded-full mt-4">
+          <img
+            className="w-full h-full object-cover object-left rounded-full"
+            src="https://yatharth-portfolio.vercel.app/static/media/MyPhoto.087402b1.jfif"
+          />
+        </div>
+        <div className="mt-4 text-center">
+          Hello, I am Yatharth Verma Currently, I am working as SDE in LeadSquared, Bangalore. I
+          love web development. I did my graduation from Lovely Professional University
+        </div>
+      </div>
+      <div className="flex space-x-4 mt-4 justify-center">
+        <div>
           <a href="http://github.com/yatharth1706" target="_blank">
-            <>
-              {" "}
-              <span className="ml-2 font-semibold">Username: </span>
-              <span>yatharth1706</span>
-            </>
+            {" "}
+            <GithubIcon />
           </a>
         </div>
 
-        <div className="shadow h-20 px-3 py-4 mb-2" style={{ width: "370px" }}>
-          <TwitterIcon />
+        <div>
           <a href="http://github.com/yatharth1706" target="_blank">
-            <>
-              <span className="ml-2 font-semibold">Username: </span>
-              <span>yatharth170699</span>
-            </>
+            <TwitterIcon />
           </a>
         </div>
 
-        <div className="shadow h-20 px-3 py-4 mb-2 " style={{ width: "370px" }}>
-          <InstaIcon />
+        <div>
           <a href="http://github.com/yatharth1706" target="_blank">
-            <>
-              <span className="ml-2 font-semibold">Username: </span>
-              <span>web_dev_yatharth</span>
-            </>
+            <InstaIcon />
           </a>
         </div>
       </div>
