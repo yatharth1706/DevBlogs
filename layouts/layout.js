@@ -15,6 +15,8 @@ import DraftIcon from "@material-ui/icons/Drafts";
 import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import BlogIcon from "@material-ui/icons/Pages";
 import UserProfile from "../components/Modal/UserProfile";
+import BarIcon from "@material-ui/icons/Dehaze";
+import CloseIcon from "@material-ui/icons/Cancel";
 import { db } from "../config/firebase.config";
 import "tailwindcss/tailwind.css";
 
@@ -24,7 +26,7 @@ const Layout = ({ children }) => {
   const defaultPic =
     "https://t3.ftcdn.net/jpg/02/10/49/86/360_F_210498655_ywivjjUe6cgyt52n4BxktRgDCfFg8lKx.jpg";
   const [modalShow, setModalShow] = useState(false);
-
+  const [navState, setNavState] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const Layout = ({ children }) => {
     };
     return notification;
   };
+
   const handleLogout = async (e) => {
     e.preventDefault();
     await logout();
@@ -81,6 +84,12 @@ const Layout = ({ children }) => {
               <AddIcon />
             </Fab>
           </Link>
+          <span className="block md:hidden" onClick={() => setNavState(!navState)}>
+            <Fab color="dark" aria-label="add" size="small" className="mr-3">
+              {navState ? <CloseIcon /> : <BarIcon />}
+            </Fab>
+          </span>
+
           {currUser ? (
             <a
               style={{ backgrountColor: "#162353" }}
@@ -90,7 +99,7 @@ const Layout = ({ children }) => {
               Logout
             </a>
           ) : (
-            <div className="flex space-x-3 mt-2 hidden sm:block">
+            <div className="flex space-x-3 mt-2 hidden md:block">
               <Link href="/login">
                 <span
                   className="px-2 py-2 bg-black rounded text-white cursor-pointer"
@@ -106,6 +115,88 @@ const Layout = ({ children }) => {
           )}
         </div>
       </div>
+
+      {/* Toggle navbar  */}
+      {navState && (
+        <div className="w-60 shadow h-screen bg-white absolute left-0 top-0">
+          <div className="flex flex-col mt-2 px-4 py-2 ">
+            {currUser && (
+              <div
+                style={{
+                  display: "flex",
+                  lineHeight: "40px",
+                  border: "1px solid white",
+                  borderBottomColor: "lightgray",
+                  marginBottom: "20px",
+                }}
+                className="profilePicHolder"
+                onClick={() => setModalShow(true)}
+              >
+                {userInfo && (
+                  <div className="py-2 flex" onClick={() => setNavState(!navState)}>
+                    <img
+                      src={userInfo.profilePic.trim() !== "" ? userInfo.profilePic : defaultPic}
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                      }}
+                      alt="profile pic"
+                    />{" "}
+                    <span>{userInfo.displayName}</span>
+                  </div>
+                )}
+              </div>
+            )}
+            {currUser ? null : (
+              <div className="flex flex-col">
+                <Link href="/login">
+                  <div className="sidebar-link cursor-pointer" onClick={() => setNavState(false)}>
+                    <LoginIcon />
+                    Sign in
+                  </div>
+                </Link>
+                <Link href="/signup">
+                  <div className="sidebar-link cursor-pointer" onClick={() => setNavState(false)}>
+                    <SignupIcon />
+                    Create an account
+                  </div>
+                </Link>
+              </div>
+            )}
+            <Link href="/">
+              <div className="sidebar-link cursor-pointer" onClick={() => setNavState(false)}>
+                <BlogIcon />
+                All Blogs
+              </div>
+            </Link>
+            {userInfo && (
+              <Link href={"/drafts/" + (currUser && currUser.uid)}>
+                <div className="sidebar-link cursor-pointer" onClick={() => setNavState(false)}>
+                  <DraftIcon />
+                  Drafts
+                </div>
+              </Link>
+            )}
+
+            <Link href="/about">
+              <div className="sidebar-link cursor-pointer" onClick={() => setNavState(false)}>
+                <InfoIcon />
+                About
+              </div>
+            </Link>
+
+            <Link href="/contact">
+              <div className="sidebar-link cursor-pointer" onClick={() => setNavState(false)}>
+                <ContactSupportIcon />
+                Contact
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col lg:flex-row">
         <div className="px-6 py-8 hidden lg:block">
           {currUser && (
