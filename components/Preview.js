@@ -13,11 +13,10 @@ const renderers = {
 const Preview = ({ showPreview, contents, backToblog, title, coverPic, coverPicURL }) => {
   return (
     <div
-      className="p-10 mt-6 shadow z-10 ml-4"
+      className="mt-6 shadow z-1 ml-2 p-8"
       style={{
         display: showPreview === true ? "display" : "block",
-        padding: "40px",
-        width: "85%",
+        width: "100%",
         height: "auto",
       }}
     >

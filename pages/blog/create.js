@@ -128,7 +128,7 @@ const PostCreate = () => {
       </Head>
       {loading === false ? (
         <>
-          <div style={{ width: "100%", height: "auto" }} className="flex flex-col">
+          <div style={{ width: "100%", height: "auto" }} className="flex flex-col p-8">
             {preview ? (
               <Preview
                 showPreview={preview}

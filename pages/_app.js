@@ -4,6 +4,7 @@ import { AuthProvider } from "../contexts/AuthProvider";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import Head from "next/head";
+// import NextNprogress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
           />
         </Head>
         <ReactNotification />
+        {/* <NextNprogress /> */}
         <Component {...pageProps} />
       </Layout>
     </AuthProvider>

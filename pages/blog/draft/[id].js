@@ -134,7 +134,7 @@ function Drafts(props) {
       </Head>
       {loading === false ? (
         <>
-          <div style={{ width: "100%", height: "auto" }} className="flex flex-col">
+          <div style={{ width: "100%", height: "auto" }} className="flex flex-col p-8">
             {preview ? (
               <Preview
                 showPreview={preview}
@@ -223,7 +223,7 @@ function Drafts(props) {
                 </div>
               </div>
             )}
-            <div className="w-full mt-1 flex space-x-3 p-2">
+            <div className="mt-1 flex space-x-3 p-2">
               <button
                 className="text-white rounded p-2"
                 style={{ backgroundColor: "#5952CB" }}

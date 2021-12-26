@@ -47,10 +47,6 @@ function Drafts({ posts }) {
                       }}
                     >
                       <span>{post.createdBy}</span>
-                      <span>
-                        <FavoriteBorderIcon />
-                        <BookmarkBorderIcon />
-                      </span>
                     </div>
                   </article>
                 </div>
